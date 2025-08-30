@@ -38,7 +38,7 @@ export default function DashboardPage() {
   return (
     <div className="container mx-auto px-4 space-y-10">
       {/* Welcome */}
-      <section className="rounded-xl border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-black/40 p-6 md:p-8 grid md:grid-cols-2 gap-6 items-center">
+      <section className="rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#15171a] p-6 md:p-8 grid md:grid-cols-2 gap-6 items-center md:min-h-[260px]">
         <div className="space-y-4">
           <h2 className="text-2xl md:text-3xl font-bold">
             Welcome to Clipy AI 👋
@@ -59,7 +59,7 @@ export default function DashboardPage() {
           </div>
         </div>
         <div className="w-full">
-          <div className="relative w-full h-40 md:h-56 overflow-hidden rounded-lg">
+          <div className="relative w-full h-56 md:h-72 overflow-hidden rounded-lg">
             <Image
               src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop"
               alt="Preview"
@@ -101,7 +101,7 @@ export default function DashboardPage() {
                 key={v.id}
                 className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800"
               >
-                <div className="relative h-36">
+                <div className="relative h-44 md:h-52">
                   <Image
                     src={v.thumbnail}
                     alt={v.title}
