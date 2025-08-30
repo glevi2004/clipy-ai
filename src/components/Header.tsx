@@ -4,8 +4,10 @@ import Link from "next/link";
 import { Video } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -17,6 +19,10 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const hideHeader =
+    pathname.startsWith("/login") || pathname.startsWith("/register");
+  if (hideHeader) return null;
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 dark:supports-[backdrop-filter]:bg-black/90">
       <div
