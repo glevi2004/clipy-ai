@@ -41,7 +41,7 @@ export default function RootLayout({
             <div className="container mx-auto flex h-14 items-center justify-between px-4">
               <div className="flex items-center gap-3">
                 <Link href="/" className="flex items-center gap-2">
-                  <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-yellow-500 text-black shadow-lg">
+                  <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#F2C94C] text-black shadow-lg">
                     <Video className="h-5 w-5" />
                   </div>
                   <span className="font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -73,7 +73,7 @@ export default function RootLayout({
                 <ModeToggle />
                 <Link
                   href="#get-started"
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] h-10 px-4 bg-yellow-500 text-black hover:bg-yellow-400 border border-yellow-500 shadow-lg"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] h-10 px-4 bg-[#F2C94C] text-black hover:bg-[#F2C94C]/80 border border-[#F2C94C] shadow-lg"
                 >
                   Start for free
                 </Link>
