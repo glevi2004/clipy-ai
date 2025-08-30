@@ -1,103 +1,258 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  Check,
+  GaugeCircle,
+  Layers,
+  PlayCircle,
+  Sparkles,
+  Wand2,
+  Zap,
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="py-10 sm:py-16">
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 opacity-30 blur-3xl [mask-image:radial-gradient(60%_60%_at_50%_10%,black,transparent)]">
+          <div className="mx-auto h-64 w-[40rem] bg-gradient-to-tr from-primary/30 via-primary/10 to-transparent rounded-full" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs text-muted-foreground mb-4">
+            <Sparkles className="size-3" />
+            <span>AI video generator for creators and teams</span>
+          </div>
+          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+            Create viral videos from text in seconds
+          </h1>
+          <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+            Clipy turns your ideas into high-quality, captioned, brand-ready
+            clips for social media. No timeline editing. Just type, generate,
+            share.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link href="#get-started">
+              <Button size="lg" className="h-11 px-6">
+                Get started free
+              </Button>
+            </Link>
+            <Link href="#how-it-works">
+              <Button variant="outline" size="lg" className="h-11 px-6">
+                See how it works
+              </Button>
+            </Link>
+          </div>
+          <div className="mt-6 text-xs text-muted-foreground">
+            No credit card required • Free forever plan available
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section id="features" className="mt-20 sm:mt-24">
+        <div className="mx-auto max-w-5xl">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <FeatureCard
+              icon={<Wand2 className="size-5" />}
+              title="Text-to-video magic"
+              description="Describe your clip and let our AI generate scenes, subtitles, and cuts."
+            />
+            <FeatureCard
+              icon={<GaugeCircle className="size-5" />}
+              title="Fast and scalable"
+              description="Export in seconds with cloud rendering optimized for speed."
+            />
+            <FeatureCard
+              icon={<Layers className="size-5" />}
+              title="On-brand templates"
+              description="Apply fonts, colors, and layouts to stay consistent across platforms."
+            />
+            <FeatureCard
+              icon={<PlayCircle className="size-5" />}
+              title="Smart captions"
+              description="Auto-captions with highlights, emojis, and progress bars built-in."
+            />
+            <FeatureCard
+              icon={<Zap className="size-5" />}
+              title="Auto reframing"
+              description="One click to adapt for TikTok, Reels, Shorts, and YouTube."
+            />
+            <FeatureCard
+              icon={<Sparkles className="size-5" />}
+              title="Stock + voiceover"
+              description="Generate voiceovers and add stock footage without leaving Clipy."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* How it works */}
+      <section id="how-it-works" className="mt-20 sm:mt-24">
+        <div className="mx-auto max-w-4xl text-center">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            How it works
+          </h2>
+          <p className="mt-2 text-muted-foreground">
+            Go from idea to export in three simple steps.
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-3 text-left">
+            <StepCard number="1" title="Describe">
+              Paste a script or describe the video you want to make.
+            </StepCard>
+            <StepCard number="2" title="Generate">
+              Clipy creates scenes, captions, cuts, and animations for you.
+            </StepCard>
+            <StepCard number="3" title="Publish">
+              Export in any format and share directly to your channels.
+            </StepCard>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="mt-20 sm:mt-24">
+        <div id="get-started" className="sr-only" />
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            Pricing
+          </h2>
+          <p className="mt-2 text-muted-foreground">
+            Start free, upgrade when you need more power.
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 text-left">
+            <PricingCard
+              name="Starter"
+              price="$0"
+              cta="Start for free"
+              features={[
+                "10 renders / month",
+                "Auto captions",
+                "Basic templates",
+              ]}
+            />
+            <PricingCard
+              name="Pro"
+              price="$29/mo"
+              cta="Upgrade to Pro"
+              featured
+              features={[
+                "Unlimited renders",
+                "Brand templates",
+                "1080p exports",
+                "Priority rendering",
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="mt-24 border-t py-8 text-sm text-muted-foreground">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="flex items-center gap-2">
+            <span className="inline-block h-5 w-5 rounded bg-primary" />
+            <span>Clipy AI</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <Link
+              href="#features"
+              className="hover:text-foreground transition-colors"
+            >
+              Features
+            </Link>
+            <Link
+              href="#how-it-works"
+              className="hover:text-foreground transition-colors"
+            >
+              How it works
+            </Link>
+            <Link
+              href="#pricing"
+              className="hover:text-foreground transition-colors"
+            >
+              Pricing
+            </Link>
+          </div>
+          <div>© {new Date().getFullYear()} Clipy, Inc.</div>
+        </div>
       </footer>
+    </div>
+  );
+}
+
+function FeatureCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="rounded-lg border p-6">
+      <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-primary/10 text-primary">
+        {icon}
+      </div>
+      <h3 className="text-base font-semibold">{title}</h3>
+      <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+    </div>
+  );
+}
+
+function StepCard({
+  number,
+  title,
+  children,
+}: {
+  number: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-lg border p-6">
+      <div className="mb-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-secondary-foreground text-xs font-semibold">
+        {number}
+      </div>
+      <h3 className="text-base font-semibold">{title}</h3>
+      <p className="mt-1 text-sm text-muted-foreground">{children}</p>
+    </div>
+  );
+}
+
+function PricingCard({
+  name,
+  price,
+  cta,
+  features,
+  featured,
+}: {
+  name: string;
+  price: string;
+  cta: string;
+  features: string[];
+  featured?: boolean;
+}) {
+  return (
+    <div className={`rounded-lg border p-6 ${featured ? "bg-card/50" : ""}`}>
+      <div className="flex items-baseline justify-between">
+        <h3 className="text-lg font-semibold">{name}</h3>
+        <div className="text-2xl font-semibold">{price}</div>
+      </div>
+      <ul className="mt-4 space-y-2 text-sm">
+        {features.map((f) => (
+          <li key={f} className="flex items-start gap-2">
+            <Check className="mt-0.5 size-4 text-primary" />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6">
+        <Button className="w-full" variant={featured ? "default" : "outline"}>
+          {cta}
+        </Button>
+      </div>
     </div>
   );
 }
