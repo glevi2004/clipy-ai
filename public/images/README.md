@@ -1,7 +1,7 @@
-Required images for the hero section:
+Please add the following placeholder images to this directory:
 
-- cleopatra.jpg - Image showing Cleopatra's throne room or similar historical setting
-- everest.jpg - Image of Mount Everest with snow and possibly a tent
-- apollo.jpg - Image of an astronaut on the moon with Earth in background
+1. `cleopatra.jpg` - An image depicting Cleopatra or ancient Egyptian themes
+2. `everest.jpg` - An image of Mount Everest or mountain landscapes
+3. `apollo.jpg` - An image of the Apollo 11 moon landing or space exploration
 
-Please add these images to this directory to complete the hero section design.
+These images are used in the hero section of the landing page. Until you add these images, you may see 404 errors in the console.
