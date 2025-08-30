@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-black dark:to-slate-950`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-white dark:bg-black`}
       >
         <ThemeProvider
           attribute="class"
@@ -37,18 +37,18 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-gradient-to-r from-white/95 via-blue-50/90 to-indigo-50/95 dark:from-gray-900/95 dark:via-black/90 dark:to-slate-900/95">
+          <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-black/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 dark:supports-[backdrop-filter]:bg-black/90">
             <div className="container mx-auto flex h-14 items-center justify-between px-4">
               <div className="flex items-center gap-3">
                 <Link href="/" className="flex items-center gap-2">
-                  <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+                  <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-yellow-500 text-black shadow-lg">
                     <Video className="h-5 w-5" />
                   </div>
-                  <span className="font-semibold tracking-tight bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  <span className="font-semibold tracking-tight text-gray-900 dark:text-white">
                     Clipy AI
                   </span>
                 </Link>
-                <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
+                <nav className="hidden md:flex items-center gap-6 text-sm text-gray-700 dark:text-muted-foreground">
                   <Link
                     href="#features"
                     className="hover:text-foreground transition-colors"
@@ -73,7 +73,7 @@ export default function RootLayout({
                 <ModeToggle />
                 <Link
                   href="#get-started"
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] h-10 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 shadow-lg"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] h-10 px-4 bg-yellow-500 text-black hover:bg-yellow-400 border border-yellow-500 shadow-lg"
                 >
                   Start for free
                 </Link>

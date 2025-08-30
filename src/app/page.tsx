@@ -16,33 +16,33 @@ export default function Home() {
     <div className="py-10 sm:py-16">
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-30 blur-3xl [mask-image:radial-gradient(60%_60%_at_50%_10%,black,transparent)]">
-          <div className="mx-auto h-64 w-[40rem] bg-gradient-to-tr from-blue-400/30 via-blue-300/20 to-blue-200/15 dark:from-blue-600/10 dark:via-blue-500/8 dark:to-blue-400/5 rounded-full" />
+        <div className="absolute inset-0 -z-10 opacity-10 blur-3xl [mask-image:radial-gradient(60%_60%_at_50%_10%,black,transparent)]">
+          <div className="mx-auto h-64 w-[40rem] bg-gradient-to-tr from-yellow-500/20 via-yellow-400/15 to-yellow-300/10 rounded-full" />
         </div>
-        <div className="absolute inset-0 -z-10 opacity-20 blur-3xl [mask-image:radial-gradient(40%_40%_at_80%_80%,black,transparent)]">
-          <div className="mx-auto h-96 w-[30rem] bg-gradient-to-bl from-blue-300/20 via-blue-400/15 to-blue-500/10 dark:from-blue-500/8 dark:via-blue-600/5 dark:to-blue-700/3 rounded-full" />
+        <div className="absolute inset-0 -z-10 opacity-8 blur-3xl [mask-image:radial-gradient(40%_40%_at_80%_80%,black,transparent)]">
+          <div className="mx-auto h-96 w-[30rem] bg-gradient-to-bl from-yellow-400/15 via-yellow-500/10 to-yellow-600/5 rounded-full" />
         </div>
         <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-gray-600 px-3 py-1 text-xs text-gray-700 dark:text-muted-foreground mb-4 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm">
-            <Sparkles className="size-3" />
-            <span>AI video generator for creators and teams</span>
-          </div>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl text-gray-900 dark:text-white">
-            Create viral videos from text in seconds
-          </h1>
-          <p className="mt-4 text-base text-gray-700 dark:text-muted-foreground sm:text-lg">
-            Clipy turns your ideas into high-quality, captioned, brand-ready
-            clips for social media. No timeline editing. Just type, generate,
-            share.
-          </p>
+                     <div className="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-gray-600 px-3 py-1 text-xs text-gray-700 dark:text-gray-300 mb-4 bg-white/80 dark:bg-black/50 backdrop-blur-sm">
+             <Sparkles className="size-3" />
+             <span>AI video generator for creators and teams</span>
+           </div>
+           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl text-gray-900 dark:text-white">
+             Create viral videos from text in seconds
+           </h1>
+           <p className="mt-4 text-base text-gray-700 dark:text-gray-300 sm:text-lg">
+             Clipy turns your ideas into high-quality, captioned, brand-ready
+             clips for social media. No timeline editing. Just type, generate,
+             share.
+           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="#get-started">
-              <Button
-                size="lg"
-                className="h-11 px-6 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg"
-              >
-                Get started free
-              </Button>
+                             <Button
+                 size="lg"
+                 className="h-11 px-6 bg-yellow-500 text-black hover:bg-yellow-400 border border-yellow-500 shadow-lg"
+               >
+                 Get started free
+               </Button>
             </Link>
             <Link href="#how-it-works">
               <Button variant="outline" size="lg" className="h-11 px-6">
@@ -50,9 +50,9 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-          <div className="mt-6 text-xs text-gray-600 dark:text-muted-foreground">
-            No credit card required • Free forever plan available
-          </div>
+                     <div className="mt-6 text-xs text-gray-600 dark:text-gray-400">
+             No credit card required • Free forever plan available
+           </div>
         </div>
       </section>
 
@@ -100,7 +100,7 @@ export default function Home() {
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl text-gray-900 dark:text-white">
             How it works
           </h2>
-          <p className="mt-2 text-gray-700 dark:text-muted-foreground">
+          <p className="mt-2 text-gray-700 dark:text-gray-300">
             Go from idea to export in three simple steps.
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-3 text-left">
@@ -124,7 +124,7 @@ export default function Home() {
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl text-gray-900 dark:text-white">
             Pricing
           </h2>
-          <p className="mt-2 text-gray-700 dark:text-muted-foreground">
+          <p className="mt-2 text-gray-700 dark:text-gray-300">
             Start free, upgrade when you need more power.
           </p>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 text-left">
@@ -155,13 +155,13 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-24 border-t border-gray-300 dark:border-gray-700 py-8 text-sm text-muted-foreground">
+      <footer className="mt-24 border-t border-gray-300 dark:border-gray-700 py-8 text-sm text-gray-600 dark:text-gray-400">
         <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 sm:flex-row">
           <div className="flex items-center gap-2">
-            <div className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+            <div className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-yellow-500 text-black">
               <Video className="h-4 w-4" />
             </div>
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold">
+            <span className="text-gray-900 dark:text-white font-semibold">
               Clipy AI
             </span>
           </div>
@@ -202,8 +202,8 @@ function FeatureCard({
   description: string;
 }) {
   return (
-    <div className="rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-800/70 transition-all duration-200 shadow-sm hover:shadow-md">
-      <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-gradient-to-br from-blue-500/20 to-blue-600/20 text-blue-600 dark:text-blue-400">
+    <div className="rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md">
+      <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-yellow-500/20 text-yellow-600 dark:text-yellow-400">
         {icon}
       </div>
       <h3 className="text-base font-semibold">{title}</h3>
@@ -222,8 +222,8 @@ function StepCard({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-800/70 transition-all duration-200 shadow-sm hover:shadow-md">
-      <div className="mb-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xs font-semibold shadow-sm">
+    <div className="rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md">
+      <div className="mb-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-yellow-500 text-black text-xs font-semibold shadow-sm">
         {number}
       </div>
       <h3 className="text-base font-semibold">{title}</h3>
@@ -247,9 +247,9 @@ function PricingCard({
 }) {
   return (
     <div
-      className={`rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-800/70 transition-all duration-200 shadow-sm hover:shadow-md ${
+      className={`rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md ${
         featured
-          ? "ring-2 ring-blue-500/20 bg-gradient-to-br from-blue-50/50 to-blue-100/30 dark:from-blue-900/30 dark:to-blue-800/20"
+          ? "ring-2 ring-yellow-500/20 bg-gradient-to-br from-yellow-50/50 to-yellow-100/30 dark:from-yellow-900/30 dark:to-yellow-800/20"
           : ""
       }`}
     >
@@ -260,7 +260,7 @@ function PricingCard({
       <ul className="mt-4 space-y-2 text-sm">
         {features.map((f) => (
           <li key={f} className="flex items-start gap-2">
-            <Check className="mt-0.5 size-4 text-blue-600 dark:text-blue-400" />
+            <Check className="mt-0.5 size-4 text-yellow-600 dark:text-yellow-400" />
             <span>{f}</span>
           </li>
         ))}
@@ -268,9 +268,9 @@ function PricingCard({
       <div className="mt-6">
         <Button
           className={`w-full ${
-            featured
-              ? "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg"
-              : ""
+                      featured
+            ? "bg-yellow-500 text-black hover:bg-yellow-400 border border-yellow-500 shadow-lg"
+            : ""
           }`}
           variant={featured ? "default" : "outline"}
         >
