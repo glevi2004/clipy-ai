@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
+import { Video } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-black dark:to-slate-950`}
       >
         <ThemeProvider
           attribute="class"
@@ -36,12 +37,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <header className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-gray-800 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-gradient-to-r from-white/95 via-blue-50/90 to-indigo-50/95 dark:from-gray-900/95 dark:via-black/90 dark:to-slate-900/95">
             <div className="container mx-auto flex h-14 items-center justify-between px-4">
               <div className="flex items-center gap-3">
                 <Link href="/" className="flex items-center gap-2">
-                  <span className="inline-block h-6 w-6 rounded bg-primary" />
-                  <span className="font-semibold tracking-tight">Clipy AI</span>
+                  <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+                    <Video className="h-5 w-5" />
+                  </div>
+                  <span className="font-semibold tracking-tight bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    Clipy AI
+                  </span>
                 </Link>
                 <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
                   <Link
@@ -68,7 +73,7 @@ export default function RootLayout({
                 <ModeToggle />
                 <Link
                   href="#get-started"
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] h-10 px-4 bg-primary text-primary-foreground hover:bg-primary/90"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] h-10 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 shadow-lg"
                 >
                   Start for free
                 </Link>
