@@ -17,8 +17,8 @@ export function Hero() {
       </div>
 
       {/* Floating Cards */}
-      <div className="absolute right-0 top-20 -z-10 flex gap-4 animate-float">
-        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] rotate-6 transform hover:rotate-0 transition-transform">
+      <div className="absolute right-0 top-20 flex gap-4">
+        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] rotate-6 cursor-pointer transform hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
           <Image
             src="/images/cleopatra.jpg"
             alt="Cleopatra"
@@ -36,7 +36,7 @@ export function Hero() {
             <h3 className="text-white text-lg mt-2">The Cleopatre Effect</h3>
           </div>
         </div>
-        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] -rotate-3 transform hover:rotate-0 transition-transform">
+        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] -rotate-3 cursor-pointer transform hover:-translate-y-8 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
           <Image
             src="/images/everest.jpg"
             alt="Everest"
@@ -56,7 +56,7 @@ export function Hero() {
             </h3>
           </div>
         </div>
-        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] rotate-12 transform hover:rotate-0 transition-transform">
+        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] rotate-12 cursor-pointer transform hover:-translate-y-8 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
           <Image
             src="/images/apollo.jpg"
             alt="Apollo"
