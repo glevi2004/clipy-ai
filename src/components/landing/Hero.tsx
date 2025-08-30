@@ -79,14 +79,14 @@ export function Hero() {
       </div>
 
       <div className="max-w-3xl">
-        <h1 className="text-6xl font-bold tracking-tight text-white">
+        <h1 className="text-6xl font-bold tracking-tight text-white max-w-md">
           Create <span className="text-[#F2C94C]">viral</span>
           <br />
           <span className="text-[#F2C94C]">faceless videos</span>
           <br />
           on Auto-Pilot.
         </h1>
-        <p className="mt-6 text-lg text-gray-400 max-w-xl">
+        <p className="mt-6 text-lg text-gray-400 max-w-md">
           Create AI Videos in minutes. Our AI creation tool creates viral AI
           videos for you.
         </p>
