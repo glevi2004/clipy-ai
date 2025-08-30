@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function Pricing() {
   return (
@@ -58,7 +59,7 @@ function PricingCard({
 }: PricingCardProps) {
   return (
     <div
-      className={`rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md ${
+      className={`rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md ${
         featured
           ? "ring-2 ring-yellow-500/20 bg-gradient-to-br from-[#F2C94C]/10 to-[#F2C94C]/5 dark:from-[#F2C94C]/20 dark:to-[#F2C94C]/10"
           : ""
@@ -84,8 +85,9 @@ function PricingCard({
               : ""
           }`}
           variant={featured ? "default" : "outline"}
+          asChild
         >
-          {cta}
+          <Link href="/register">{cta}</Link>
         </Button>
       </div>
     </div>

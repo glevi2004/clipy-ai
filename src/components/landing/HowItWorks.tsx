@@ -53,7 +53,7 @@ interface StepCardProps {
 
 function StepCard({ number, title, children }: StepCardProps) {
   return (
-    <div className="rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md">
+    <div className="rounded-lg border border-gray-300 dark:border-gray-700 p-6 bg-white/80 dark:bg-gray-900/50 hover:bg-white/90 dark:hover:bg-gray-900/70 transition-all duration-200 shadow-sm hover:shadow-md">
       <div className="mb-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F2C94C] text-black text-xs font-semibold shadow-sm">
         {number}
       </div>

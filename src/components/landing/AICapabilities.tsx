@@ -22,7 +22,7 @@ export function AICapabilities() {
               <h3 className="text-white font-semibold text-[28px]">
                 The story of Cleopatra
               </h3>
-              <div className="mt-3 bg-[#ffffff1a] backdrop-blur-sm text-white text-sm px-4 py-1.5 rounded-full inline-block">
+              <div className="mt-3 bg-[#ffffff1a] text-white text-sm px-4 py-1.5 rounded-full inline-block">
                 Historical
               </div>
             </div>
@@ -34,7 +34,7 @@ export function AICapabilities() {
               <h3 className="text-white font-semibold text-[28px]">
                 Apollo 11 Moon Landing
               </h3>
-              <div className="mt-3 bg-[#ffffff1a] backdrop-blur-sm text-white text-sm px-4 py-1.5 rounded-full inline-block">
+              <div className="mt-3 bg-[#ffffff1a] text-white text-sm px-4 py-1.5 rounded-full inline-block">
                 Space
               </div>
             </div>
@@ -46,7 +46,7 @@ export function AICapabilities() {
               <h3 className="text-white font-semibold text-[28px]">
                 Japanese Ink Style
               </h3>
-              <div className="mt-3 bg-[#ffffff1a] backdrop-blur-sm text-white text-sm px-4 py-1.5 rounded-full inline-block">
+              <div className="mt-3 bg-[#ffffff1a] text-white text-sm px-4 py-1.5 rounded-full inline-block">
                 Art
               </div>
             </div>
@@ -82,7 +82,7 @@ interface VoiceCardProps {
 
 function VoiceCard({ name, description }: VoiceCardProps) {
   return (
-    <div className="p-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/50 backdrop-blur-sm">
+    <div className="p-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/50">
       <div className="w-12 h-12 rounded-full bg-[#F2C94C] mb-3 flex items-center justify-center">
         <PlayCircle className="w-6 h-6 text-black" />
       </div>

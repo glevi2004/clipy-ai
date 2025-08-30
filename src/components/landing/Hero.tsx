@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 
@@ -18,16 +17,7 @@ export function Hero() {
 
       {/* Floating Cards */}
       <div className="absolute right-0 top-20 flex gap-4">
-        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] rotate-6 cursor-pointer transform hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
-          <Image
-            src="/images/cleopatra.jpg"
-            alt="Cleopatra"
-            width={400}
-            height={600}
-            className="w-full h-full object-cover"
-            priority
-            quality={100}
-          />
+        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-gradient-to-br from-purple-600 to-purple-800 rotate-6 cursor-pointer transform hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
           <div className="absolute bottom-6 left-6">
             <div className="bg-black/40 text-white text-xs px-2 py-1 rounded-md inline-block">
@@ -36,16 +26,7 @@ export function Hero() {
             <h3 className="text-white text-lg mt-2">The Cleopatre Effect</h3>
           </div>
         </div>
-        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] -rotate-3 cursor-pointer transform hover:-translate-y-8 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
-          <Image
-            src="/images/everest.jpg"
-            alt="Everest"
-            width={400}
-            height={600}
-            className="w-full h-full object-cover"
-            priority
-            quality={100}
-          />
+        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-gradient-to-br from-green-600 to-green-800 -rotate-3 cursor-pointer transform hover:-translate-y-8 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
           <div className="absolute bottom-6 left-6">
             <div className="bg-[#1DB954]/40 text-[#1DB954] text-xs px-2 py-1 rounded-md inline-block">
@@ -56,16 +37,7 @@ export function Hero() {
             </h3>
           </div>
         </div>
-        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-[#1a1d21] rotate-12 cursor-pointer transform hover:-translate-y-8 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
-          <Image
-            src="/images/apollo.jpg"
-            alt="Apollo"
-            width={400}
-            height={600}
-            className="w-full h-full object-cover"
-            priority
-            quality={100}
-          />
+        <div className="w-64 h-[420px] rounded-[32px] overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 rotate-12 cursor-pointer transform hover:-translate-y-8 hover:shadow-2xl transition-all duration-500 ease-in-out group relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
           <div className="absolute bottom-6 left-6">
             <div className="bg-white/40 text-white text-xs px-2 py-1 rounded-md inline-block">
@@ -91,7 +63,7 @@ export function Hero() {
           videos for you.
         </p>
         <div className="mt-10">
-          <Link href="#get-started">
+          <Link href="/register">
             <Button
               size="lg"
               className="h-14 px-8 bg-[#F2C94C] text-black hover:bg-[#F2C94C]/80 rounded-full text-base font-medium"
