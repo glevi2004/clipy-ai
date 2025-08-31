@@ -8,8 +8,12 @@ import { AIWriterModal } from "@/components/protected/AIWriterModal";
 
 import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
+import { VideoStorageService } from "@/firebase/services/videoStorageService";
+import { useAuth } from "@/contexts/authContext";
+import { Loading } from "@/components/ui/loading";
 
 export default function CreateAIVideoPage() {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     script: "",
     video_type: "asmr",
@@ -24,6 +28,7 @@ export default function CreateAIVideoPage() {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isAIWriterModalOpen, setIsAIWriterModalOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Example videos mapping
   const videoExamples = {
@@ -93,6 +98,34 @@ export default function CreateAIVideoPage() {
       if (data.success) {
         console.log("✅ Video generation successful!");
         console.log(`🎥 Video URL: ${data.data?.videoUrl}`);
+
+        // Automatically save video to Firebase Storage and Firestore
+        if (user && data.data?.videoUrl) {
+          try {
+            setIsSaving(true);
+            console.log("💾 Saving video to Firebase...");
+
+            const videoId = await VideoStorageService.saveVideo(user, {
+              originalVideoUrl: data.data.videoUrl,
+              script: formData.script,
+              videoType: formData.video_type,
+              aspectRatio: formData.aspect_ratio,
+              resolution: formData.resolution,
+              duration: formData.duration,
+              seed: formData.seed,
+              cameraFixed: formData.camera_fixed,
+              enableSafetyChecker: formData.enable_safety_checker,
+              title: `${formData.video_type.toUpperCase()} Video - ${new Date().toLocaleDateString()}`,
+            });
+
+            console.log("✅ Video saved to Firebase with ID:", videoId);
+          } catch (saveError) {
+            console.error("❌ Failed to save video to Firebase:", saveError);
+            // Continue showing the video even if saving fails
+          } finally {
+            setIsSaving(false);
+          }
+        }
       } else {
         console.error("❌ Video generation failed:", data.error);
       }
@@ -205,10 +238,7 @@ export default function CreateAIVideoPage() {
                 className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
               >
                 <option value="16:9">16:9</option>
-                <option value="21:9">21:9</option>
-                <option value="4:3">4:3</option>
                 <option value="1:1">1:1</option>
-                <option value="3:4">3:4</option>
                 <option value="9:16">9:16</option>
               </select>
             </div>
@@ -302,7 +332,14 @@ export default function CreateAIVideoPage() {
             </div>
 
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? "Generating..." : "Generate Video"}
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <Loading size="sm" />
+                  <span>Generating...</span>
+                </div>
+              ) : (
+                "Generate Video"
+              )}
             </Button>
           </form>
 
@@ -310,14 +347,24 @@ export default function CreateAIVideoPage() {
           {result && (
             <div className="mt-8">
               {result.success ? (
-                <div className="rounded-lg overflow-hidden">
-                  <video
-                    src={result.data?.videoUrl}
-                    controls
-                    className="w-full"
-                  >
-                    Your browser does not support the video tag.
-                  </video>
+                <div className="space-y-4">
+                  <div className="rounded-lg overflow-hidden">
+                    <video
+                      src={result.data?.videoUrl}
+                      controls
+                      className="w-full"
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                  {isSaving && (
+                    <div className="flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900/20 rounded-lg border border-gray-200 dark:border-gray-800">
+                      <Loading
+                        size="sm"
+                        text="Saving video to your library..."
+                      />
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="text-red-500 text-center">{result.error}</div>
@@ -361,6 +408,8 @@ export default function CreateAIVideoPage() {
         isOpen={isAIWriterModalOpen}
         onClose={() => setIsAIWriterModalOpen(false)}
         onScriptGenerated={handleScriptGenerated}
+        videoType={formData.video_type}
+        videoDuration={formData.duration}
       />
     </div>
   );

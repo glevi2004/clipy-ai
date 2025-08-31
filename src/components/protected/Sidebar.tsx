@@ -39,11 +39,6 @@ const items = [
     icon: Video,
   },
   {
-    title: "Series",
-    url: "/series",
-    icon: Film,
-  },
-  {
     title: "Calendar",
     url: "/calendar",
     icon: Calendar,

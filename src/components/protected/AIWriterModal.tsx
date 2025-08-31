@@ -12,12 +12,16 @@ interface AIWriterModalProps {
   isOpen: boolean;
   onClose: () => void;
   onScriptGenerated: (script: string) => void;
+  videoType?: string;
+  videoDuration?: string;
 }
 
 export function AIWriterModal({
   isOpen,
   onClose,
   onScriptGenerated,
+  videoType = "asmr",
+  videoDuration = "30",
 }: AIWriterModalProps) {
   const [prompt, setPrompt] = useState("");
   const [generatedScript, setGeneratedScript] = useState("");
@@ -31,8 +35,8 @@ export function AIWriterModal({
       console.log("Generating script with prompt:", prompt);
 
       const script = await AIScriptWriterService.generateScript({
-        videoType: "standard", // You can make this configurable via props or state
-        videoDuration: "30", // You can make this configurable via props or state
+        videoType,
+        videoDuration,
         userIdeaInput: prompt,
       });
 
