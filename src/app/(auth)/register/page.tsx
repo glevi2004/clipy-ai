@@ -5,17 +5,17 @@ import { Video, Eye, EyeOff, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useAuth } from "@/contexts/authContext";
-import { useRouter } from "next/navigation";
+import { Loading } from "@/components/ui/loading";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     password: "",
   });
   const { register, loginWithGoogle } = useAuth();
-  const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -26,9 +26,34 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await register(formData.email, formData.password, formData.fullName);
-    router.push("/dashboard");
+    setIsLoading(true);
+    try {
+      await register(formData.email, formData.password, formData.fullName);
+      // Auth context will handle redirect
+    } catch (error) {
+      console.error("Registration failed:", error);
+      setIsLoading(false);
+    }
   };
+
+  const handleGoogleLogin = async () => {
+    setIsLoading(true);
+    try {
+      await loginWithGoogle();
+      // Auth context will handle redirect
+    } catch (error) {
+      console.error("Google login failed:", error);
+      setIsLoading(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loading size="lg" text="Creating your account..." />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex">
@@ -158,10 +183,7 @@ export default function RegisterPage() {
               type="button"
               variant="outline"
               className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
-              onClick={async () => {
-                await loginWithGoogle();
-                router.push("/dashboard");
-              }}
+              onClick={handleGoogleLogin}
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path

@@ -3,8 +3,10 @@
 import { useEffect } from "react";
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import DashboardHeader from "@/components/protected/DashboardHeader";
 import { AppSidebar } from "@/components/protected/Sidebar";
+import { LoadingPage } from "@/components/ui/loading";
 
 export default function ProtectedLayout({
   children,
@@ -21,7 +23,7 @@ export default function ProtectedLayout({
   }, [loading, user, router]);
 
   if (loading) {
-    return <div className="p-6">Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (!user) return null;
@@ -30,7 +32,7 @@ export default function ProtectedLayout({
     <SidebarProvider>
       <AppSidebar />
       <main>
-        <SidebarTrigger />
+        <DashboardHeader />
         {children}
       </main>
     </SidebarProvider>
