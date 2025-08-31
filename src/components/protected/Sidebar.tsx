@@ -1,4 +1,15 @@
-import { Calendar, Home, Inbox, Search, Settings, LogOut } from "lucide-react";
+import {
+  Calendar,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+  LogOut,
+  ChevronDown,
+  ChevronRight,
+  CreditCard,
+  User,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -10,7 +21,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,12 +40,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/authContext";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Video, Film } from "lucide-react";
 
-// Menu items.
+// Regular menu items.
 const items = [
   {
     title: "Dashboard",
@@ -38,21 +58,31 @@ const items = [
     url: "/videos",
     icon: Video,
   },
+  // {
+  //   title: "Calendar",
+  //   url: "/calendar",
+  //   icon: Calendar,
+  // },
+];
+
+// Settings submenu items
+const settingsItems = [
   {
-    title: "Calendar",
-    url: "/calendar",
-    icon: Calendar,
+    title: "General",
+    url: "/settings/general",
+    icon: User,
   },
   {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings,
+    title: "Billing",
+    url: "/settings/billing",
+    icon: CreditCard,
   },
 ];
 
 export function AppSidebar() {
   const { user, logout } = useAuth();
   const router = useRouter();
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const initials = (user?.displayName || user?.email || "")
     .slice(0, 1)
@@ -75,6 +105,41 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+
+              {/* Settings Collapsible Menu */}
+              <Collapsible
+                open={isSettingsOpen}
+                onOpenChange={setIsSettingsOpen}
+                asChild
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton>
+                      <Settings />
+                      <span>Settings</span>
+                      {isSettingsOpen ? (
+                        <ChevronDown className="ml-auto transition-transform duration-200" />
+                      ) : (
+                        <ChevronRight className="ml-auto transition-transform duration-200" />
+                      )}
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {settingsItems.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton asChild>
+                            <Link href={subItem.url}>
+                              <subItem.icon />
+                              <span>{subItem.title}</span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
