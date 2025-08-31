@@ -30,11 +30,13 @@ export default function ProtectedLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar />
-      <main className="w-full flex flex-col align-items-center justify-center">
-        <DashboardHeader />
-        {children}
-      </main>
+      <div className="flex w-full min-h-screen bg-[#111111]">
+        <AppSidebar />
+        <main className="w-full flex flex-col align-items-center justify-center bg-[#111111] min-h-screen">
+          <DashboardHeader />
+          {children}
+        </main>
+      </div>
     </SidebarProvider>
   );
 }
