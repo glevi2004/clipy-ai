@@ -4,6 +4,7 @@ import { useState } from "react";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { VIDEO_TYPE_PRESETS } from "../../../../../lib/constants/videoPresets";
+import { AIWriterModal } from "@/components/protected/AIWriterModal";
 
 import { useEffect } from "react";
 import { Sparkles } from "lucide-react";
@@ -22,6 +23,7 @@ export default function CreateAIVideoPage() {
 
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [isAIWriterModalOpen, setIsAIWriterModalOpen] = useState(false);
 
   // Example videos mapping
   const videoExamples = {
@@ -120,6 +122,13 @@ export default function CreateAIVideoPage() {
     }));
   };
 
+  const handleScriptGenerated = (script: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      script: script,
+    }));
+  };
+
   return (
     <div className="container mx-auto py-6 px-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -164,7 +173,12 @@ export default function CreateAIVideoPage() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Script
                 </label>
-                <Button type="button" variant="secondary" size="sm">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setIsAIWriterModalOpen(true)}
+                >
                   <Sparkles />
                   AI Writer
                 </Button>
@@ -342,6 +356,12 @@ export default function CreateAIVideoPage() {
           </div>
         </div>
       </div>
+
+      <AIWriterModal
+        isOpen={isAIWriterModalOpen}
+        onClose={() => setIsAIWriterModalOpen(false)}
+        onScriptGenerated={handleScriptGenerated}
+      />
     </div>
   );
 }
