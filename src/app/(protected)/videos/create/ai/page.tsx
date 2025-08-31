@@ -24,11 +24,7 @@ export default function CreateAIVideoPage() {
 
   // Example videos mapping
   const videoExamples = {
-    asmr: [
-      "/videos/video_1756617701038_42.mp4",
-      "/videos/video_1756617574219_42.mp4",
-      "/videos/video_1756607133016_42.mp4",
-    ],
+    asmr: ["/videos/asmr/video_1756620031555_38.mp4"],
     pov: [
       "/videos/pov/video_1756617782557_42.mp4",
       "/videos/pov/video_1756614514925_42.mp4",
