@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { VIDEO_TYPE_PRESETS } from "@/lib/constants/videoPrompts";
 
 export default function CreateAIVideoPage() {
   const [formData, setFormData] = useState({
-    prompt: "",
+    script: "",
+    video_type: "asmr",
     aspect_ratio: "16:9",
     resolution: "1080p",
     duration: "5",
@@ -27,17 +29,44 @@ export default function CreateAIVideoPage() {
     setResult(null);
 
     try {
+      console.log("🎬 Starting video generation process...");
+      console.log("📝 Form data:", formData);
+
+      const typePrompt = VIDEO_TYPE_PRESETS[formData.video_type] || "";
+      console.log(`🎯 Selected video type: ${formData.video_type}`);
+      console.log(`📋 Type prompt: "${typePrompt}"`);
+      console.log(`✍️ User script: "${formData.script}"`);
+
+      const composedPrompt = `${typePrompt}\n\n${formData.script}`.trim();
+      console.log(`🔗 Final composed prompt: "${composedPrompt}"`);
+
+      const { video_type, script, ...rest } = formData as any;
+      const payload = { ...rest, prompt: composedPrompt };
+      console.log("📦 API payload:", payload);
+
+      console.log("🚀 Sending request to /api/video...");
       const response = await fetch("/api/video", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
+      console.log(`📡 API response status: ${response.status}`);
       const data = await response.json();
+      console.log("📊 API response data:", data);
+
+      if (data.success) {
+        console.log("✅ Video generation successful!");
+        console.log(`🎥 Video URL: ${data.data?.videoUrl}`);
+      } else {
+        console.error("❌ Video generation failed:", data.error);
+      }
+
       setResult(data);
     } catch (error) {
+      console.error("💥 Frontend error during video generation:", error);
       setResult({
         success: false,
         error: "Failed to generate video",
@@ -60,8 +89,6 @@ export default function CreateAIVideoPage() {
     }));
   };
 
-  const videoOptions = [{}, {}];
-
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -70,17 +97,33 @@ export default function CreateAIVideoPage() {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Prompt */}
+          {/* Video Type */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Prompt
+              Video Type
+            </label>
+            <select
+              name="video_type"
+              value={formData.video_type}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
+            >
+              <option value="asmr">ASMR</option>
+              <option value="pov">POV</option>
+            </select>
+          </div>
+
+          {/* Script */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Script
             </label>
             <textarea
-              name="prompt"
-              value={formData.prompt}
+              name="script"
+              value={formData.script}
               onChange={handleInputChange}
               className="w-full h-32 px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-              placeholder="Describe your video..."
+              placeholder="Write your script..."
               required
             />
           </div>
