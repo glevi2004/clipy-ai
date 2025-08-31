@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
-import { VIDEO_TYPE_PRESETS } from "@/lib/constants/videoPrompts";
+import { VIDEO_TYPE_PRESETS } from "../../../../../lib/constants/videoPresets";
 
 export default function CreateAIVideoPage() {
   const [formData, setFormData] = useState({
@@ -32,13 +33,16 @@ export default function CreateAIVideoPage() {
       console.log("🎬 Starting video generation process...");
       console.log("📝 Form data:", formData);
 
-      const typePrompt = VIDEO_TYPE_PRESETS[formData.video_type] || "";
+      const typePrompt = VIDEO_TYPE_PRESETS[formData.video_type]?.prompt || "";
       console.log(`🎯 Selected video type: ${formData.video_type}`);
-      console.log(`📋 Type prompt: "${typePrompt}"`);
-      console.log(`✍️ User script: "${formData.script}"`);
+      console.log("📋 Type prompt (full):", typePrompt);
+      console.log("📏 Type prompt length:", typePrompt.length);
+      console.log("✍️ User script (full):", formData.script);
+      console.log("📏 User script length:", formData.script.length);
 
       const composedPrompt = `${typePrompt}\n\n${formData.script}`.trim();
-      console.log(`🔗 Final composed prompt: "${composedPrompt}"`);
+      console.log("🔗 Final composed prompt (full):", composedPrompt);
+      console.log("📏 Final composed prompt length:", composedPrompt.length);
 
       const { video_type, script, ...rest } = formData as any;
       const payload = { ...rest, prompt: composedPrompt };
@@ -98,19 +102,32 @@ export default function CreateAIVideoPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Video Type */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Video Type
-            </label>
-            <select
-              name="video_type"
-              value={formData.video_type}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-            >
-              <option value="asmr">ASMR</option>
-              <option value="pov">POV</option>
-            </select>
+          <div className="flex items-center gap-3 py-2">
+            {Object.keys(VIDEO_TYPE_PRESETS).map((type) => (
+              <button
+                key={type}
+                type="button"
+                onClick={() =>
+                  setFormData((prev) => ({ ...prev, video_type: type }))
+                }
+                className={`
+                  px-4 py-1.5 rounded-full text-sm font-medium transition-colors
+                  ${
+                    formData.video_type === type
+                      ? "bg-[#5200FF] text-white"
+                      : "bg-[#1A1B1E] text-gray-300 hover:bg-[#27282B]"
+                  }
+                `}
+              >
+                <span className="flex items-center gap-2">
+                  {/* Icon component is passed directly from presets */}
+                  {React.createElement(VIDEO_TYPE_PRESETS[type].icon, {
+                    className: "w-4 h-4",
+                  })}
+                  <span>{type.toUpperCase()}</span>
+                </span>
+              </button>
+            ))}
           </div>
 
           {/* Script */}
