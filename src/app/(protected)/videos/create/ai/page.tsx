@@ -5,6 +5,8 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { VIDEO_TYPE_PRESETS } from "../../../../../lib/constants/videoPresets";
 
+import { useEffect } from "react";
+
 export default function CreateAIVideoPage() {
   const [formData, setFormData] = useState({
     script: "",
@@ -17,7 +19,35 @@ export default function CreateAIVideoPage() {
     enable_safety_checker: true,
   });
 
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  // Example videos mapping
+  const videoExamples = {
+    asmr: [
+      "/videos/video_1756617701038_42.mp4",
+      "/videos/video_1756617574219_42.mp4",
+      "/videos/video_1756607133016_42.mp4",
+    ],
+    pov: [
+      "/videos/pov/video_1756617782557_42.mp4",
+      "/videos/pov/video_1756614514925_42.mp4",
+    ],
+  };
+
+  // Reset video index when video type changes
+  useEffect(() => {
+    setCurrentVideoIndex(0);
+  }, [formData.video_type]);
+
+  // Get current videos for the selected type
+  const currentVideos =
+    videoExamples[formData.video_type as keyof typeof videoExamples] || [];
+
+  // Handle video end to play next video
+  const handleVideoEnd = () => {
+    setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % currentVideos.length);
+  };
   const [result, setResult] = useState<{
     success: boolean;
     data?: { videoUrl: string };
@@ -94,23 +124,24 @@ export default function CreateAIVideoPage() {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-          Generate AI Video
-        </h1>
+    <div className="container mx-auto py-6 px-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="md:col-span-2">
+          <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+            Generate AI Video
+          </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Video Type */}
-          <div className="flex items-center gap-3 py-2">
-            {Object.keys(VIDEO_TYPE_PRESETS).map((type) => (
-              <button
-                key={type}
-                type="button"
-                onClick={() =>
-                  setFormData((prev) => ({ ...prev, video_type: type }))
-                }
-                className={`
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Video Type */}
+            <div className="flex items-center gap-3 py-2">
+              {Object.keys(VIDEO_TYPE_PRESETS).map((type) => (
+                <button
+                  key={type}
+                  type="button"
+                  onClick={() =>
+                    setFormData((prev) => ({ ...prev, video_type: type }))
+                  }
+                  className={`
                   px-4 py-1.5 rounded-full text-sm font-medium transition-colors
                   ${
                     formData.video_type === type
@@ -118,160 +149,195 @@ export default function CreateAIVideoPage() {
                       : "bg-[#1A1B1E] text-gray-300 hover:bg-[#27282B]"
                   }
                 `}
-              >
-                <span className="flex items-center gap-2">
-                  {/* Icon component is passed directly from presets */}
-                  {React.createElement(VIDEO_TYPE_PRESETS[type].icon, {
-                    className: "w-4 h-4",
-                  })}
-                  <span>{type.toUpperCase()}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-
-          {/* Script */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Script
-            </label>
-            <textarea
-              name="script"
-              value={formData.script}
-              onChange={handleInputChange}
-              className="w-full h-32 px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-              placeholder="Write your script..."
-              required
-            />
-          </div>
-
-          {/* Aspect Ratio */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Aspect Ratio
-            </label>
-            <select
-              name="aspect_ratio"
-              value={formData.aspect_ratio}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-            >
-              <option value="16:9">16:9</option>
-              <option value="21:9">21:9</option>
-              <option value="4:3">4:3</option>
-              <option value="1:1">1:1</option>
-              <option value="3:4">3:4</option>
-              <option value="9:16">9:16</option>
-            </select>
-          </div>
-
-          {/* Resolution */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Resolution
-            </label>
-            <select
-              name="resolution"
-              value={formData.resolution}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-            >
-              <option value="480p">480p</option>
-              <option value="720p">720p</option>
-              <option value="1080p">1080p</option>
-            </select>
-          </div>
-
-          {/* Duration */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Duration (seconds)
-            </label>
-            <select
-              name="duration"
-              value={formData.duration}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-            >
-              {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
-                <option key={num} value={String(num)}>
-                  {num}s
-                </option>
+                >
+                  <span className="flex items-center gap-2">
+                    {/* Icon component is passed directly from presets */}
+                    {React.createElement(VIDEO_TYPE_PRESETS[type].icon, {
+                      className: "w-4 h-4",
+                    })}
+                    <span>{type.toUpperCase()}</span>
+                  </span>
+                </button>
               ))}
-            </select>
-          </div>
+            </div>
 
-          {/* Camera Fixed */}
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="camera_fixed"
-              checked={formData.camera_fixed}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  camera_fixed: e.target.checked,
-                }))
-              }
-              className="h-4 w-4 text-[#F2C94C] focus:ring-[#F2C94C] border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#15171a] rounded"
-            />
-            <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-              Fixed Camera
-            </label>
-          </div>
+            {/* Script */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Script
+              </label>
+              <textarea
+                name="script"
+                value={formData.script}
+                onChange={handleInputChange}
+                className="w-full h-32 px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
+                placeholder="Write your script..."
+                required
+              />
+            </div>
 
-          {/* Seed */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Seed
-            </label>
-            <input
-              type="number"
-              name="seed"
-              value={formData.seed}
-              onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
-            />
-          </div>
+            {/* Aspect Ratio */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Aspect Ratio
+              </label>
+              <select
+                name="aspect_ratio"
+                value={formData.aspect_ratio}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
+              >
+                <option value="16:9">16:9</option>
+                <option value="21:9">21:9</option>
+                <option value="4:3">4:3</option>
+                <option value="1:1">1:1</option>
+                <option value="3:4">3:4</option>
+                <option value="9:16">9:16</option>
+              </select>
+            </div>
 
-          {/* Safety Checker */}
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              name="enable_safety_checker"
-              checked={formData.enable_safety_checker}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  enable_safety_checker: e.target.checked,
-                }))
-              }
-              className="h-4 w-4 text-[#F2C94C] focus:ring-[#F2C94C] border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#15171a] rounded"
-            />
-            <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-              Enable Safety Checker
-            </label>
-          </div>
+            {/* Resolution */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Resolution
+              </label>
+              <select
+                name="resolution"
+                value={formData.resolution}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
+              >
+                <option value="480p">480p</option>
+                <option value="720p">720p</option>
+                <option value="1080p">1080p</option>
+              </select>
+            </div>
 
-          <Button type="submit" disabled={loading} className="w-full">
-            {loading ? "Generating..." : "Generate Video"}
-          </Button>
-        </form>
+            {/* Duration */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Duration (seconds)
+              </label>
+              <select
+                name="duration"
+                value={formData.duration}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
+              >
+                {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
+                  <option key={num} value={String(num)}>
+                    {num}s
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        {/* Result Display */}
-        {result && (
-          <div className="mt-8">
-            {result.success ? (
-              <div className="rounded-lg overflow-hidden">
-                <video src={result.data?.videoUrl} controls className="w-full">
+            {/* Camera Fixed */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="camera_fixed"
+                checked={formData.camera_fixed}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    camera_fixed: e.target.checked,
+                  }))
+                }
+                className="h-4 w-4 text-[#F2C94C] focus:ring-[#F2C94C] border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#15171a] rounded"
+              />
+              <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                Fixed Camera
+              </label>
+            </div>
+
+            {/* Seed */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Seed
+              </label>
+              <input
+                type="number"
+                name="seed"
+                value={formData.seed}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:ring-[#F2C94C] focus:border-[#F2C94C] bg-gray-50 dark:bg-[#15171a] text-gray-900 dark:text-white"
+              />
+            </div>
+
+            {/* Safety Checker */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="enable_safety_checker"
+                checked={formData.enable_safety_checker}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    enable_safety_checker: e.target.checked,
+                  }))
+                }
+                className="h-4 w-4 text-[#F2C94C] focus:ring-[#F2C94C] border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#15171a] rounded"
+              />
+              <label className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                Enable Safety Checker
+              </label>
+            </div>
+
+            <Button type="submit" disabled={loading} className="w-full">
+              {loading ? "Generating..." : "Generate Video"}
+            </Button>
+          </form>
+
+          {/* Result Display */}
+          {result && (
+            <div className="mt-8">
+              {result.success ? (
+                <div className="rounded-lg overflow-hidden">
+                  <video
+                    src={result.data?.videoUrl}
+                    controls
+                    className="w-full"
+                  >
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              ) : (
+                <div className="text-red-500 text-center">{result.error}</div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Video Example Section */}
+        <div className="md:col-span-1">
+          <div className="border-l border-gray-800 pl-6 h-full">
+            <h2 className="text-xl font-semibold mb-4 text-white">
+              Example Output
+            </h2>
+            <div className="rounded-lg overflow-hidden">
+              {currentVideos.length > 0 ? (
+                <video
+                  key={currentVideoIndex} // Key changes force video reload when switching
+                  src={currentVideos[currentVideoIndex]}
+                  autoPlay // Auto start playback
+                  loop={currentVideos.length === 1} // Loop if only one video
+                  onEnded={handleVideoEnd} // Switch to next video when current one ends
+                  muted // Muted by default
+                  controls // Allow user control
+                  className="w-full h-full object-cover"
+                  poster="/media-types/realistic.png"
+                >
                   Your browser does not support the video tag.
                 </video>
-              </div>
-            ) : (
-              <div className="text-red-500 text-center">{result.error}</div>
-            )}
+              ) : (
+                <div className="flex items-center justify-center h-48 text-gray-400">
+                  No example available
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
