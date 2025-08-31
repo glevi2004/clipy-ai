@@ -102,12 +102,12 @@ export function AppSidebar() {
                   {initials}
                 </div>
               )}
-              <div className="flex-1 text-left">
-                <div className="text-sm font-medium truncate">
+              <div className="flex-1 text-left min-w-0">
+                <div className="text-sm font-medium truncate max-w-[160px]">
                   {user?.displayName || user?.email || "Account"}
                 </div>
                 {user?.email && (
-                  <div className="text-xs text-muted-foreground truncate">
+                  <div className="text-xs text-muted-foreground truncate max-w-[160px]">
                     {user.email}
                   </div>
                 )}
