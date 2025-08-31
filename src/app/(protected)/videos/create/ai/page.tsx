@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { VIDEO_TYPE_PRESETS } from "../../../../../lib/constants/videoPresets";
 
 import { useEffect } from "react";
+import { Sparkles } from "lucide-react";
 
 export default function CreateAIVideoPage() {
   const [formData, setFormData] = useState({
@@ -159,9 +160,15 @@ export default function CreateAIVideoPage() {
 
             {/* Script */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Script
-              </label>
+              <div className="flex items-center justify-between mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Script
+                </label>
+                <Button type="button" variant="secondary" size="sm">
+                  <Sparkles />
+                  AI Writer
+                </Button>
+              </div>
               <textarea
                 name="script"
                 value={formData.script}
