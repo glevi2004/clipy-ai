@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Video } from "lucide-react";
+import { Video, Paperclip } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -33,7 +33,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2">
             <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#F2C94C] text-black shadow-lg">
-              <Video className="h-5 w-5" />
+              <Paperclip className="h-5 w-5" />
             </div>
             <span className="font-semibold tracking-tight text-gray-900 dark:text-white">
               Clipy AI

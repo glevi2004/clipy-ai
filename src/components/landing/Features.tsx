@@ -80,6 +80,6 @@ const FEATURES = [
     icon: <Sparkles className="size-5" />,
     title: "Stock + voiceover",
     description:
-      "Generate voiceovers and add stock footage without leaving Clipy.",
+      "Generate voiceovers and add stock footage without leaving Ai.",
   },
 ];
